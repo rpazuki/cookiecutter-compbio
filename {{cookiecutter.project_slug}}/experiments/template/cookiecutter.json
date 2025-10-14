@@ -1,5 +1,5 @@
 {
-  "experiment_name": "{{cookiecutter.github_username}}_[[ cookiecutter.date ]]",
+  "experiment_name": "{{cookiecutter.github_username}}_[[  ]]",
   "experiment_slug": "[[ cookiecutter.experiment_name.lower().replace(' ', '_') ]]",
   "author": "Anonymous"
 }
