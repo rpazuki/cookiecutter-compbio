@@ -1,6 +1,6 @@
 # Cookiecutter CompBio
 
-A [Cookiecutter](https://github.com/cookiecutter/cookiecutter) template for computational biology projects.
+A [rpazuki/cookiecutter-compbio](https://github.com/rpazuki/cookiecutter-compbio) template for computational biology projects.
 
 
 # Quickstart
@@ -20,3 +20,8 @@ Or:
 * Create the enviroment and start working!
 
 `conda env create --file environment.yml`
+
+* for each new numerical experiment, enter the experiments folder, and create a new one
+
+`cd expriments `
+`cookiecutter template`
