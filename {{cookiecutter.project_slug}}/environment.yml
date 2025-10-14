@@ -8,12 +8,12 @@ dependencies:
     - black
     - jupyterlab
 {% endif %}
-#{% if cookiecutter.language in ['R', 'Both']
-#%}    - r
+# {% if cookiecutter.language in ['R', 'Both']
+# %}    - r
 #    - r-styler{% endif %}
-#{% if cookiecutter.manuscript_format == 'R Markdown' or cookiecutter.language == 'R'
-#%}    - r-rmarkdown{% endif %}
+# {% if cookiecutter.manuscript_format == 'R Markdown' or cookiecutter.language == 'R'
+# %}    - r-rmarkdown{% endif %}
 #
 # In json: // "add_dvc": "n",
-#{% if cookiecutter.add_dvc == 'y'
-#%}    - dvc{% endif %}
+# {% if cookiecutter.add_dvc == 'y'
+# %}    - dvc{% endif %}
