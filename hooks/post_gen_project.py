@@ -10,20 +10,14 @@ def remove_file(filepath):
 
 if __name__ == '__main__':
     
-    remove_file('results/.keep')
+    remove_file('experiment/.keep')
     remove_file('data/.keep')
-
-    if '{{ cookiecutter.language }}' == 'R':
-        remove_file('src/main_analysis.ipynb')
-        remove_file('src/helpers/utils.py')
-        remove_file('src/helpers/__init__.py')
+    
 
     if '{{ cookiecutter.language }}' == 'Python':
         remove_file('src/main_analysis.rmd')
         remove_file('src/helpers/utils.R')
-
-    if '{{ cookiecutter.manuscript_format }}' == 'R Markdown':
-        remove_file('doc/main.tex')
+    
 
     if '{{ cookiecutter.manuscript_format }}' == 'LaTeX':
         remove_file('doc/main.rmd')
