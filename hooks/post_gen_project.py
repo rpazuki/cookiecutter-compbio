@@ -24,7 +24,7 @@ if __name__ == '__main__':
     
     remove_file('experiments/.keep')
     replace_brackets_in_file('experiments/experiments_template/cookiecutter.json')
-    create_folder('experiments/experiments_template/cookiecutter.experiment_slug')
+    create_folder('experiments/experiments_template/{{ cookiecutter.experiment_slug')
     remove_file('data/.keep')
     
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
