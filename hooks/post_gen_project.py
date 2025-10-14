@@ -29,7 +29,7 @@ def move_folder(source_filepath, destination_filepath):
 if __name__ == '__main__':
     
     remove_file('experiments/.keep')
-    replace_brackets_in_file('experiments/cookiecutter.json')
+    replace_brackets_in_file('experiments/experiments_templates/cookiecutter.json')
     remove_file('data/.keep')
     
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
