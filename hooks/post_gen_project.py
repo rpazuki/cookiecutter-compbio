@@ -16,7 +16,7 @@ def replace_brackets_in_file(filepath):
     with open(filepath, 'r') as f:
         content = f.read()
 
-    new_content = content.replace("<<<<", "{{").replace(">>>>", "}}")
+    new_content = content.replace("[", "{").replace("]", "}")
     with open(filepath, 'w') as f:
         f.write(new_content)
 
