@@ -22,5 +22,5 @@ if __name__ == '__main__':
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
          remove_file('doc/references.bib')
 
-    move_folder('experiments_template', 'experiments')
+   
 

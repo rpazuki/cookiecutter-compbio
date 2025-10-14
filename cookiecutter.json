@@ -8,6 +8,7 @@
   "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "language": ["Python"],
   "open_source_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3"],  
-  "manuscript_format": ["Word", "LaTeX", "Other"]
+  "manuscript_format": ["Word", "LaTeX", "Other"],
+  "experiment_name": "Experiment"
 
 }
