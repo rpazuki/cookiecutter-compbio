@@ -3,14 +3,17 @@ channels:
     - conda-forge
     - defaults
 dependencies:
-{% if cookiecutter.language in ['Python', 'Both']
+{% if cookiecutter.language in ['Python']
 %}    - pip
     - black
-    - jupyterlab{% endif %}
-{% if cookiecutter.language in ['R', 'Both']
-%}    - r
-    - r-styler{% endif %}
-{% if cookiecutter.manuscript_format == 'R Markdown' or cookiecutter.language == 'R'
-%}    - r-rmarkdown{% endif %}
-{% if cookiecutter.add_dvc == 'y'
-%}    - dvc{% endif %}
+    - jupyterlab
+{% endif %}
+#{% if cookiecutter.language in ['R', 'Both']
+#%}    - r
+#    - r-styler{% endif %}
+#{% if cookiecutter.manuscript_format == 'R Markdown' or cookiecutter.language == 'R'
+#%}    - r-rmarkdown{% endif %}
+#
+# In json: // "add_dvc": "n",
+#{% if cookiecutter.add_dvc == 'y'
+#%}    - dvc{% endif %}
