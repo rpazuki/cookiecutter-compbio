@@ -11,6 +11,14 @@ def remove_file(filepath):
 def rename_file(old_filepath, new_filepath):
     os.rename(os.path.join(PROJECT_DIRECTORY, old_filepath),
               os.path.join(PROJECT_DIRECTORY, new_filepath))    
+    
+def replace_brackets_in_file(filepath):
+    with open(filepath, 'r') as f:
+        content = f.read()
+
+    new_content = content.replace("<<<<", "{{").replace(">>>>", "}}")
+    with open(filepath, 'w') as f:
+        f.write(new_content)
 
 def move_folder(source_filepath, destination_filepath):
     
@@ -21,8 +29,7 @@ def move_folder(source_filepath, destination_filepath):
 if __name__ == '__main__':
     
     remove_file('experiments/.keep')
-    rename_file('experiments/experiments_template/cookiecutter.json.temp',
-                'experiments/experiments_template/cookiecutter.json')
+    replace_brackets_in_file('experiments/cookiecutter.json')
     remove_file('data/.keep')
     
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':

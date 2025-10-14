@@ -1,5 +1,0 @@
-{
-  "experiment_name": "Experiment",
-  "experiment_slug": "{{ cookiecutter.experiment_name.lower().replace(' ', '_') }}",
-  "author": "Anonymous"
-}
