@@ -10,7 +10,7 @@ def remove_file(filepath):
 
 if __name__ == '__main__':
     
-    remove_file('experiment/.keep')
+    remove_file('experiments/.keep')
     remove_file('data/.keep')
     
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
