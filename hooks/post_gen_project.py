@@ -28,7 +28,13 @@ def replace_brackets_in_file(filepath:str):
 if __name__ == '__main__':    
     remove_file('experiments/.keep')
     
-    
+    # If the name of a folder contains '{}', the cookiecutter will try to change it. Since we need the
+    # 'template' folder for calling the cookiecutter later, we uses '[]' inplace of
+    # '{}', and change all of '[]' to '{}' eventually.
+    replace_brackets_in_file('experiments/template/cookiecutter.json')
+    create_folder('experiments/template/[[ cookiecutter.experiment_slug ]]')
+    rename_brackets_in_folder_name('experiments/template', '[[ cookiecutter.experiment_slug ]]')
+    #
     remove_file('data/.keep')
     
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
