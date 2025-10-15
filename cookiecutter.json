@@ -4,9 +4,8 @@
   "project_name": "Computational Biology Project",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "A computational biology project by {{ cookiecutter.full_name }}",
-  "python_version_number": "3.13",
   "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-  "language": ["Python"],
+  "shared_data_folder":"",
   "open_source_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3"],  
   "manuscript_format": ["Word", "LaTeX", "Other"]
 

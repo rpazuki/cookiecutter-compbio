@@ -3,8 +3,7 @@ channels:
     - conda-forge
     - defaults
 dependencies:
-{% if cookiecutter.language in ['Python']
-%}    - pip
+    - pip
     - black
     - jupyterlab
-{% endif %}
+
