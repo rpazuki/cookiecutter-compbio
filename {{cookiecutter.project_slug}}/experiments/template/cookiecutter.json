@@ -4,5 +4,6 @@
   "author": "{{ cookiecutter.full_name }}",
   "create_python_env": "Y",
   "python_env_name": ".env",
-  "install_packages": "Y"
+  "install_packages": "Y",
+  "copy_last_experiment": "N"
 }

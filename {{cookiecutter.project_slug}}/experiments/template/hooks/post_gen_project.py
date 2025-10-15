@@ -2,6 +2,7 @@
 import os
 import platform
 import subprocess
+import shutil
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 EXPERIMENTS_DIRECTORY = os.path.abspath(os.path.join(os.path.curdir, os.pardir))
@@ -20,6 +21,28 @@ def __run_command__(command:list) -> bool:
         return False
 
 
+def __get_last_experiment_dir__(experiments_dir, except_dir=None):
+    # List all directories in experiments_dir
+    dirs = [d for d in os.listdir(experiments_dir) 
+            if os.path.isdir(os.path.join(experiments_dir, d)) and d != os.path.basename(except_dir)]
+    # Sort by modification time (most recent last)
+    dirs.sort(key=lambda d: os.path.getmtime(os.path.join(experiments_dir, d)))
+    # Return the most recent directory name, or None if none found
+    return dirs[-1] if dirs else None
+
+def __copy_directory_contents__(src_dir, dst_dir):
+    """Copy all files and folders from src_dir to dst_dir, excluding names starting with a dot."""
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+    for item in os.listdir(src_dir):
+        if item.startswith('.'):
+            continue
+        s = os.path.join(src_dir, item)
+        d = os.path.join(dst_dir, item)
+        if os.path.isdir(s):
+            shutil.copytree(s, d, dirs_exist_ok=True)
+        else:
+            shutil.copy2(s, d)
 
 def install_python_env() -> bool:
     """Create a local python environment"""
@@ -33,7 +56,8 @@ def install_python_env() -> bool:
         else:
             return False
         
-    return False
+    return True
+
 
 def install_environment() -> bool:
     """Install packages that are listed in """
@@ -56,11 +80,31 @@ def install_environment() -> bool:
        else:
            return False
         
-    return False
+    return True
 
+
+def copy_last_experiment() -> bool:
+    """copy all files from the last experiment to the new one"""
+    if '{${ cookiecutter.copy_last_experiment.lower().strip() }$}' == 'n':
+        return True
+    
+    # copy the last experiment files
+    last_experiment = __get_last_experiment_dir__(EXPERIMENTS_DIRECTORY, PROJECT_DIRECTORY)
+    print(f"Copy the last experiment ('{last_experiment}') files ...")
+    try:
+        __copy_directory_contents__(os.path.join(EXPERIMENTS_DIRECTORY,last_experiment), PROJECT_DIRECTORY)
+        return True
+    except Exception as e:
+        print(f"Error copying files from '{last_experiment}' to '{PROJECT_DIRECTORY}': {e}")
+        return False
+    
+    
+    
+    
 if __name__ == '__main__':
     commands = [install_python_env,
-                install_environment]
+                install_environment,
+                copy_last_experiment]
     ret = True
     # Execute commands if the previous one was successful
     while ret == True and len(commands) > 0:
