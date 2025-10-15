@@ -3,6 +3,7 @@ import os
 import platform
 import subprocess
 
+
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
 def __run_command__(command:list) -> bool:
@@ -17,6 +18,7 @@ def __run_command__(command:list) -> bool:
     else:
         print(result.stderr)
         return False
+    
 
 def remove_file(filepath:str):
     os.remove(os.path.join(PROJECT_DIRECTORY, filepath)) 
@@ -43,7 +45,7 @@ if __name__ == '__main__':
     remove_file('experiments/.keep')            
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
         remove_file('doc/references.bib')
-    # 
+    # mapp the data folder to a shared folder if specified
     if '{{ cookiecutter.shared_data_folder.lower().strip() }}' != '':          
         if platform.system()  == "Windows":             
             if __run_command__(["cmd", "/c", "mklink", "/D", "data", '{{ cookiecutter.shared_data_folder }}']) == False:
@@ -61,6 +63,7 @@ if __name__ == '__main__':
     create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/models')
     create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/notebooks')
     create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/processed')
+    
     # If the name of a folder contains '{}', the cookiecutter will try to change it. Since we need the
     # 'template' folder for calling the cookiecutter later, we uses '$' around the
     # '{}', and remove them eventually.

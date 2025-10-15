@@ -6,6 +6,7 @@ import shutil
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 EXPERIMENTS_DIRECTORY = os.path.abspath(os.path.join(os.path.curdir, os.pardir))
+MAIN_DIRECTORY = os.path.abspath(os.path.join(os.path.curdir, os.pardir, os.pardir))
 
 def __run_command__(command:list) -> bool:
     result = subprocess.run(command,
@@ -44,6 +45,28 @@ def __copy_directory_contents__(src_dir, dst_dir):
         else:
             shutil.copy2(s, d)
 
+def __copy_file__(src_file, dst_file):
+    """Move a file from src_file to dst_file."""    
+    shutil.copy2(src_file, dst_file)    
+
+
+def __replace_in_file__(filepath:str, pattern:str, replacement:str):
+    with open(filepath, 'r') as f:
+        content = f.read()
+
+    new_content = content.replace(pattern, replacement)
+    with open(filepath, 'w') as f:
+        f.write(new_content)
+
+def copy_default_files():
+    src_file = os.path.join(EXPERIMENTS_DIRECTORY, "template", "notebook_example.ipynb")
+    dst_file =  os.path.join(PROJECT_DIRECTORY, "notebooks", "notebook_example.ipynb")
+    __copy_file__(src_file,
+                  dst_file)        
+    #    
+    
+    return True         
+
 def install_python_env() -> bool:
     """Create a local python environment"""
     if '{${ cookiecutter.create_python_env.lower().strip() }$}' == 'y':
@@ -52,17 +75,17 @@ def install_python_env() -> bool:
         # IMPROTANT: do not remove the list. Since brackets turn into curly bracket, we need it here.
         if __run_command__(["python", "-m",  "venv", "{${ cookiecutter.python_env_name }$}"]):        
             print("python environment is created.")
-            return True
+            return True               
         else:
             return False
         
     return True
 
 
-def install_environment() -> bool:
+def install_requirements() -> bool:
     """Install packages that are listed in """
     if '{${ cookiecutter.install_packages.lower().strip() }$}' == 'y':
-       # Activate the python environment
+       # Activate the python requirements
        if platform.system()  == "Windows":
            python_path = os.path.join(PROJECT_DIRECTORY,"{${ cookiecutter.python_env_name }$}", "Scripts", "python.exe")
        else:
@@ -82,6 +105,19 @@ def install_environment() -> bool:
         
     return True
 
+def install_local_lib() -> bool:
+    # Activate the python environment
+    if platform.system()  == "Windows":
+        python_path = os.path.join(PROJECT_DIRECTORY,"{${ cookiecutter.python_env_name }$}", "Scripts", "python.exe")
+    else:
+        python_path = os.path.join(PROJECT_DIRECTORY,"{${ cookiecutter.python_env_name }$}", "bin", "python")            
+    if platform.system()  == "Windows":        
+        src_path = MAIN_DIRECTORY + "\\src\\" +  "{{ cookiecutter.module_name }}"
+    else:
+        src_path =   MAIN_DIRECTORY + "/src/" +  "{{ cookiecutter.module_name }}"
+    
+    print(f"Install local package '{src_path}' ...")
+    return __run_command__([python_path, "-m",  "pip", "install", "-e", src_path])  
 
 def copy_last_experiment() -> bool:
     """copy all files from the last experiment to the new one"""
@@ -102,8 +138,10 @@ def copy_last_experiment() -> bool:
     
     
 if __name__ == '__main__':
-    commands = [install_python_env,
-                install_environment,
+    commands = [copy_default_files,
+                install_python_env,
+                install_requirements,
+                install_local_lib,
                 copy_last_experiment]
     ret = True
     # Execute commands if the previous one was successful
