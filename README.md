@@ -23,5 +23,5 @@ Or:
 
 * for each new numerical experiment, enter the experiments folder, and create a new one
 
-`cd expriments `
+`cd expriments`
 `cookiecutter template`
