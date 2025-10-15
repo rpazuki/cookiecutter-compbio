@@ -1,5 +1,7 @@
 {
-  "experiment_name": "{{ cookiecutter.github_username }}_[% now 'local', '%Y_%m_%d' %]",
-  "experiment_slug": "[[ cookiecutter.experiment_name.lower().replace(' ', '_') ]]",
-  "author": "Anonymous"
+  "experiment_name": "{{ cookiecutter.github_username }}_${$% now 'local', '%Y_%m_%d' %$}$",
+  "experiment_slug": "{${ cookiecutter.experiment_name.lower().replace(' ', '_') }$}",
+  "author": "{{ cookiecutter.full_name }}",
+  "python_env": "Y",
+  "python_env_name": ".env"
 }
