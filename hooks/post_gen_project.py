@@ -26,19 +26,24 @@ def remove_dollar_sign_in_file(filepath:str):
 
 
 if __name__ == '__main__':    
-    remove_file('experiments/.keep')
-    
+
+    #
+    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}')
+    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/reports')
+    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/reports/figures')
+    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/models')
+    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/notebooks')
+    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}/processed')
     # If the name of a folder contains '{}', the cookiecutter will try to change it. Since we need the
     # 'template' folder for calling the cookiecutter later, we uses '$' around the
     # '{}', and remove them eventually.
-    remove_dollar_sign_in_file('experiments/template/cookiecutter.json')
-    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}')
+    remove_dollar_sign_in_file('experiments/template/cookiecutter.json')    
     rename_brackets_in_folder_name('experiments/template', '{${cookiecutter.experiment_slug}$}')
-    #
     remove_dollar_sign_in_file('experiments/template/hooks/post_gen_project.py')
+    #    
     #
-    remove_file('data/.keep')
-    
+    remove_file('experiments/.keep')    
+    remove_file('data/.keep')    
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
         remove_file('doc/references.bib')
 
