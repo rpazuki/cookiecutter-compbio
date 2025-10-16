@@ -87,8 +87,7 @@ def install_python_env() -> bool:
         print(
             "Begin creating a python environment in "
             "'{${ cookiecutter.python_env_name }$}' ...")
-        # IMPROTANT: do not remove the list.
-        # Since brackets turn into curly bracket, we need it here.
+        # Create the python environment
         if __run_command__(["python", "-m",  "venv",
                             "{${ cookiecutter.python_env_name }$}"]):
             print("python environment is created.")
