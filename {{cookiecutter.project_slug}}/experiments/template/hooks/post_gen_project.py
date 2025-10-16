@@ -9,11 +9,12 @@ EXPERIMENTS_DIRECTORY = os.path.abspath(
     os.path.join(os.path.curdir, os.pardir))
 MAIN_DIRECTORY = os.path.abspath(
     os.path.join(os.path.curdir, os.pardir, os.pardir))
+IS_WINDOWS = platform.system() == "Windows"
 
 
 def __run_command__(command: list) -> bool:
     result = subprocess.run(command,
-                            shell=True,
+                            shell=IS_WINDOWS,
                             capture_output=True,
                             text=True,
                             check=False)
@@ -102,7 +103,7 @@ def install_requirements() -> bool:
     """Install packages that are listed in """
     if '{${ cookiecutter.install_packages.lower().strip() }$}' == 'y':
         # Activate the python requirements
-        if platform.system() == "Windows":
+        if IS_WINDOWS:
             python_path = os.path.join(
                 PROJECT_DIRECTORY,
                 "{${ cookiecutter.python_env_name }$}",
@@ -139,22 +140,22 @@ def install_requirements() -> bool:
 def install_local_lib() -> bool:
     """Install the local library in editable mode in src folder"""
     # Activate the python environment
-    if platform.system() == "Windows":
+    if IS_WINDOWS:
         python_path = os.path.join(
             PROJECT_DIRECTORY,
             "{${ cookiecutter.python_env_name }$}",
             "Scripts",
             "python.exe")
+        #
+        src_path = MAIN_DIRECTORY + "\\src\\" + \
+            "{{ cookiecutter.module_name }}"
     else:
         python_path = os.path.join(
             PROJECT_DIRECTORY,
             "{${ cookiecutter.python_env_name }$}",
             "bin",
             "python")
-    if platform.system() == "Windows":
-        src_path = MAIN_DIRECTORY + "\\src\\" + \
-            "{{ cookiecutter.module_name }}"
-    else:
+        #
         src_path = MAIN_DIRECTORY + "/src/" + "{{ cookiecutter.module_name }}"
 
     print(f"Install local package '{src_path}' ...")

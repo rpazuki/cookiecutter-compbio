@@ -5,11 +5,12 @@ import subprocess
 
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
+IS_WINDOWS = platform.system() == "Windows"
 
 
 def __run_command__(command: list) -> bool:
     result = subprocess.run(command,
-                            shell=True,
+                            shell=IS_WINDOWS,
                             capture_output=True,
                             text=True,
                             check=False)
@@ -57,7 +58,7 @@ if __name__ == '__main__':
         remove_file('doc/references.bib')
     # mapp the data folder to a shared folder if specified
     if '{{ cookiecutter.shared_data_folder.lower().strip() }}' != '':
-        if platform.system() == "Windows":
+        if IS_WINDOWS:
             if not __run_command__(["cmd",
                                     "/c",
                                     "mklink",
