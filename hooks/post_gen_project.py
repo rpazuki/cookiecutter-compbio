@@ -71,7 +71,7 @@ if __name__ == '__main__':
                 print(
                     f'mklink /D "{os.path.join(PROJECT_DIRECTORY,"data")}" '
                     f'"{os.path.abspath("{{ cookiecutter.shared_data_folder }}")}"')
-        else:  # TODO: write for other os
+        else:
             os.symlink(os.path.abspath('{{ cookiecutter.shared_data_folder }}'),
                        os.path.join(PROJECT_DIRECTORY, 'data'),
                        target_is_directory=True)
