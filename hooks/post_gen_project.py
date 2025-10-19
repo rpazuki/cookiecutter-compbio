@@ -82,7 +82,8 @@ if __name__ == '__main__':
         create_folder('data')
     #
     if not os.path.exists(os.path.join(PROJECT_DIRECTORY,
-                                       'experiments/template/{{cookiecutter.experiment_slug}}')):
+                                       'experiments/template/' +
+                                       '{${cookiecutter.experiment_slug}$}'.replace('$', ''))):
 
         create_folder(
             'experiments/template/{${cookiecutter.experiment_slug}$}')
