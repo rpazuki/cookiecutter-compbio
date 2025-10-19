@@ -1,0 +1,10 @@
+[project]
+name = "{{ cookiecutter.module_name }}"
+version = "0.0.1"
+authors = ["{{ cookiecutter.full_name }}"]
+description = "{{ cookiecutter.project_short_description }}"
+readme = "README.md"
+license = "{{ cookiecutter.open_source_license }}"
+github_username = "{{ cookiecutter.github_username }}"
+shared_data_folder = "{{ cookiecutter.shared_data_folder }}"
+manuscript_format = "{{ cookiecutter.manuscript_format }}"

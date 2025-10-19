@@ -26,3 +26,6 @@ Or:
 `cd expriments`
 
 `cookiecutter template`
+
+* To use the newer version of the template on old projects, use
+`cookiecutter https://github.com/rpazuki/cookiecutter-compbio.git --replay  -f`
