@@ -30,7 +30,9 @@ def remove_file(filepath: str):
 
 def create_folder(folder: str):
     """Create a folder given its relative path from the project directory."""
-    os.mkdir(os.path.join(PROJECT_DIRECTORY, folder))
+    # If the folder already exists, do nothing
+    if not os.path.exists(os.path.join(PROJECT_DIRECTORY, folder)):
+        os.mkdir(os.path.join(PROJECT_DIRECTORY, folder))
 
 
 def rename_brackets_in_folder_name(folder: str, folder_name: str):
