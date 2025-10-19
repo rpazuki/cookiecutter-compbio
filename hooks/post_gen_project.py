@@ -38,7 +38,10 @@ def create_folder(folder: str):
 def rename_brackets_in_folder_name(folder: str, folder_name: str):
     """Rename a folder by removing '$' from its name."""
     # If the folder name contains '$', remove it
-    if '$' in folder_name:
+    if ('$' in folder_name and
+        not os.path.exists(os.path.join(PROJECT_DIRECTORY,
+                                        folder,
+                                        folder_name.replace('$', '')))):
         # Rename the folder by removing '$' from its name
         os.rename(os.path.join(PROJECT_DIRECTORY, folder, folder_name),
                   os.path.join(PROJECT_DIRECTORY, folder,
