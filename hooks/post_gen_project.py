@@ -37,16 +37,11 @@ def create_folder(folder: str):
 
 def rename_brackets_in_folder_name(folder: str, folder_name: str):
     """Rename a folder by removing '$' from its name."""
-    # If the folder name contains '$', remove it
-    if ('$' in folder_name and
-        not os.path.exists(os.path.join(PROJECT_DIRECTORY,
-                                        folder,
-                                        folder_name.replace('$', '')))):
-        # Rename the folder by removing '$' from its name
-        os.rename(os.path.join(PROJECT_DIRECTORY, folder, folder_name),
-                  os.path.join(PROJECT_DIRECTORY, folder,
-                               folder_name.replace('$', ''))
-                  )
+    # Rename the folder by removing '$' from its name
+    os.rename(os.path.join(PROJECT_DIRECTORY, folder, folder_name),
+              os.path.join(PROJECT_DIRECTORY, folder,
+                           folder_name.replace('$', ''))
+              )
 
 
 def remove_dollar_sign_in_file(filepath: str):
@@ -86,25 +81,30 @@ if __name__ == '__main__':
     else:
         create_folder('data')
     #
-    create_folder('experiments/template/{${cookiecutter.experiment_slug}$}')
-    create_folder(
-        'experiments/template/{${cookiecutter.experiment_slug}$}/reports')
-    create_folder(
-        'experiments/template/{${cookiecutter.experiment_slug}$}/reports/figures')
-    create_folder(
-        'experiments/template/{${cookiecutter.experiment_slug}$}/models')
-    create_folder(
-        'experiments/template/{${cookiecutter.experiment_slug}$}/notebooks')
-    create_folder(
-        'experiments/template/{${cookiecutter.experiment_slug}$}/processed')
+    if not os.path.exists(os.path.join(PROJECT_DIRECTORY,
+                                       'experiments/template/{{cookiecutter.experiment_slug}}')):
+
+        create_folder(
+            'experiments/template/{${cookiecutter.experiment_slug}$}')
+        create_folder(
+            'experiments/template/{${cookiecutter.experiment_slug}$}/reports')
+        create_folder(
+            'experiments/template/{${cookiecutter.experiment_slug}$}/reports/figures')
+        create_folder(
+            'experiments/template/{${cookiecutter.experiment_slug}$}/models')
+        create_folder(
+            'experiments/template/{${cookiecutter.experiment_slug}$}/notebooks')
+        create_folder(
+            'experiments/template/{${cookiecutter.experiment_slug}$}/processed')
+        rename_brackets_in_folder_name(
+            'experiments/template', '{${cookiecutter.experiment_slug}$}')
 
     # If the name of a folder contains '{}', the cookiecutter will try
     # to change it. Since we need the
     # 'template' folder for calling the cookiecutter later,
     # we uses '$' around the '{}', and remove them eventually.
     remove_dollar_sign_in_file('experiments/template/cookiecutter.json')
-    rename_brackets_in_folder_name(
-        'experiments/template', '{${cookiecutter.experiment_slug}$}')
+
     remove_dollar_sign_in_file(
         'experiments/template/hooks/post_gen_project.py')
     #
