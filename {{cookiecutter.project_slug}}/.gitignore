@@ -47,3 +47,8 @@ ENV/
 
 # R Environment Variables
 .Renviron
+
+
+# Data folder and its contents
+data/
+data/**
