@@ -60,24 +60,27 @@ if __name__ == '__main__':
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
         remove_file('doc/references.bib')
     # mapp the data folder to a shared folder if specified
-    if '{{ cookiecutter.shared_data_folder.lower().strip() }}' != '':
-        if IS_WINDOWS:
-            if not __run_command__(["cmd",
-                                    "/c",
-                                    "mklink",
-                                    "/D",
-                                    "data",
-                                    '{{ cookiecutter.shared_data_folder }}']):
-                print("Failed to create a symbolic link. "
-                      "Please run the command below in the command prompt "
-                      "(cmd) as an administrator:")
-                print(
-                    f'mklink /D "{os.path.join(PROJECT_DIRECTORY,"data")}" '
-                    f'"{os.path.abspath("{{ cookiecutter.shared_data_folder }}")}"')
-        else:
-            os.symlink(os.path.abspath('{{ cookiecutter.shared_data_folder }}'),
-                       os.path.join(PROJECT_DIRECTORY, 'data'),
-                       target_is_directory=True)
+    # if '{{ cookiecutter.shared_data_folder.lower().strip() }}' != '':
+    #     if IS_WINDOWS:
+    #         if not __run_command__(["cmd",
+    #                                 "/c",
+    #                                 "mklink",
+    #                                 "/D",
+    #                                 "data",
+    #                                 '{{ cookiecutter.shared_data_folder }}']):
+    #             print("Failed to create a symbolic link. "
+    #                   "Please run the command below in the command prompt "
+    #                   "(cmd) as an administrator:")
+    #             print(
+    #                 f'mklink /D "{os.path.join(PROJECT_DIRECTORY,"data")}" '
+    #                 f'"{os.path.abspath("{{ cookiecutter.shared_data_folder }}")}"')
+    #     else:
+    #         os.symlink(os.path.abspath('{{ cookiecutter.shared_data_folder }}'),
+    #                    os.path.join(PROJECT_DIRECTORY, 'data'),
+    #                    target_is_directory=True)
+        os.symlink(os.path.abspath('{{ cookiecutter.shared_data_folder }}'),
+                        os.path.join(PROJECT_DIRECTORY, 'data'),
+                        target_is_directory=True)
     else:
         create_folder('data')
     #
