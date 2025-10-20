@@ -60,7 +60,7 @@ if __name__ == '__main__':
     if '{{ cookiecutter.manuscript_format }}' != 'LaTeX':
         remove_file('doc/references.bib')
     # mapp the data folder to a shared folder if specified
-    # if '{{ cookiecutter.shared_data_folder.lower().strip() }}' != '':
+    if '{{ cookiecutter.shared_data_folder.lower().strip() }}' != '':
     #     if IS_WINDOWS:
     #         if not __run_command__(["cmd",
     #                                 "/c",
