@@ -18,15 +18,23 @@ Or:
 
 `cookiecutter https://github.com/rpazuki/cookiecutter-compbio.git`
 
-* Create the enviroment and start working!
 
-`conda env create --file environment.yml`
-
-* for each new numerical experiment, enter the experiments folder, and create a new one
+* For each new numerical experiment, enter the experiments folder, and create a new one
 
 `cd expriments`
 
 `cookiecutter template`
+
+> Note that the environment packages are defined in 'requirment.txt'. Therefore, to include new packages/libraries, add them to 'requirment.txt'. 
+
+* In case you need to remove and create a new python library in an experiment, assuming the current environment is in '.env' folder, run the followings:
+`rm -rf .env`
+`deactivate`
+`python -m venv .env`
+`source .env/bin/activate`
+(In windows `.env/Scripts/activate`)
+`pip install -U pip`
+`python -m pip install -r ../requirment.txt`
 
 * To use the newer version of the template on old projects, use
 `cookiecutter https://github.com/rpazuki/cookiecutter-compbio.git --replay  -f`
