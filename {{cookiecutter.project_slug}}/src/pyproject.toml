@@ -8,5 +8,5 @@ readme = "README.md"
 authors = ["{{ cookiecutter.full_name }}"]
 license = "{{ cookiecutter.open_source_license }}"
 github_username = "{{ cookiecutter.github_username }}"
-shared_data_folder = "{{ cookiecutter.shared_data_folder }}"
+shared_data_directory = "{{ cookiecutter.shared_data_directory }}"
 manuscript_format = "{{ cookiecutter.manuscript_format }}"

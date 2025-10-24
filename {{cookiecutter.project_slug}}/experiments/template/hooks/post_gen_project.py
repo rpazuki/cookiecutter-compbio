@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
 import platform
-import subprocess
 import shutil
+import subprocess
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 EXPERIMENTS_DIRECTORY = os.path.abspath(
@@ -29,9 +29,10 @@ def __run_command__(command: list) -> bool:
 
 def __get_last_experiment_dir__(experiments_dir, except_dir=None):
     # List all directories in experiments_dir
+    except_dir_name = os.path.basename(except_dir) if except_dir else None
     dirs = [d for d in os.listdir(experiments_dir)
             if os.path.isdir(os.path.join(experiments_dir, d)) and
-            d != os.path.basename(except_dir)]
+            d != except_dir_name]
     # Sort by modification time (most recent last)
     dirs.sort(key=lambda d: os.path.getmtime(os.path.join(experiments_dir, d)))
     # Return the most recent directory name, or None if none found
@@ -147,8 +148,7 @@ def install_local_lib() -> bool:
             "Scripts",
             "python.exe")
         #
-        src_path = MAIN_DIRECTORY + "\\src\\" + \
-            "{{ cookiecutter.module_name }}"
+        src_path = MAIN_DIRECTORY + "\\src\\"
     else:
         python_path = os.path.join(
             PROJECT_DIRECTORY,
@@ -156,8 +156,7 @@ def install_local_lib() -> bool:
             "bin",
             "python")
         #
-        src_path = MAIN_DIRECTORY + "/src/" + "{{ cookiecutter.module_name }}"
-
+        src_path = MAIN_DIRECTORY + "/src/"
     print(f"Install local package '{src_path}' ...")
     return __run_command__([python_path,
                             "-m",
