@@ -60,6 +60,7 @@ if __name__ == '__main__':
         remove_file('doc/references.bib')
     # mapp the data folder to a shared folder if specified
     if '{{ cookiecutter.shared_data_directory.lower().strip() }}' != '':
+        pass
     #     if IS_WINDOWS:
     #         if not __run_command__(["cmd",
     #                                 "/c",
@@ -80,7 +81,6 @@ if __name__ == '__main__':
         # os.symlink(os.path.abspath('{{ cookiecutter.shared_data_directory }}'),
         #                 os.path.join(PROJECT_DIRECTORY, 'data'),
         #                 target_is_directory=True)
-        pass
     else:
         create_folder('data')
     #
