@@ -3,7 +3,7 @@
   "experiment_slug": "{${ cookiecutter.experiment_name.lower().replace(' ', '_') }$}",
   "author": "{{ cookiecutter.full_name }}",
   "create_python_env": "Y",
-  "python_env_name": ".env",
+  "python_env_name": ".venv",
   "install_packages": "Y",
   "copy_last_experiment": "N"
 }

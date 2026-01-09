@@ -25,14 +25,14 @@ Or:
 
 `cookiecutter template`
 
-> Note that the environment packages are defined in 'requirment.txt'. Therefore, to include new packages/libraries, add them to 'requirment.txt'. 
+> Note that the environment packages are defined in 'requirment.txt'. Therefore, to include new packages/libraries, add them to 'requirment.txt'.
 
-* In case you need to remove and create a new python library in an experiment, assuming the current environment is in '.env' folder, run the followings:
-`rm -rf .env`
+* In case you need to remove and create a new python library in an experiment, assuming the current environment is in '.venv' folder, run the followings:
+`rm -rf .venv`
 `deactivate`
-`python -m venv .env`
-`source .env/bin/activate`
-(In windows `.env/Scripts/activate`)
+`python -m venv .venv`
+`source .venv/bin/activate`
+(In windows `.venv/Scripts/activate`)
 `pip install -U pip`
 `python -m pip install -r ../requirment.txt`
 
@@ -60,41 +60,41 @@ The ideal workflow should meet the following expectations. While not all are cur
 
 The workflow is organized into the following main folders. Some include subfolders, whose purposes are explained below:
 
-1. **`data/`**  
+1. **`data/`**
     Contains all experimental data. Subfolders may be used to logically categorize lab data, though no strict naming convention is enforced at this stage. All numerical experiments will access this folder directly, ensuring a single copy of raw data exists locally. For shared or remote access, this folder can use **mounting** or **symbolic links** to point to the appropriate data source.
-    
-2. **`docs/`**  
+
+2. **`docs/`**
     Stores files related to paper submissions. Subfolders may be used to organize content by paper title, journal formatting, or revision stage. No naming conventions are currently enforced.
-    
-3. **`src/`**  
+
+3. **`src/`**
     Contains general-purpose code developed by researchers. All experiments should treat this folder as a local library. This promotes code reuse, consistency, and easier development. Ideally, this folder will be maintained in a shared repository for use in future projects.
-    
-4. **`experiments/`**  
-    This folder holds all numerical experiments. Each experiment should be placed in a subfolder named using the format:  
-    **`PersonName_Date_ShortDescription`**  
+
+4. **`experiments/`**
+    This folder holds all numerical experiments. Each experiment should be placed in a subfolder named using the format:
+    **`PersonName_Date_ShortDescription`**
     The date helps track chronological order, assuming each experiment spans several days.
-    
+
     Each experiment folder must be **self-contained and reproducible**. It should include:
-    
+
     - A dedicated **Python environment** to avoid version conflicts. Use `pip freeze` to capture dependencies for future use.
     - **`README.md`** – Describes the experiment.
     - **`Makefile`** – Automates key steps.
     - **`processed/`** – Contains preprocessed data. Raw data is read from `data/` and saved here. All preprocessing steps should be implemented in a single script or notebook, executable via `make`.
-    - **`notebooks/`** – Jupyter notebooks. Use a naming convention:  
+    - **`notebooks/`** – Jupyter notebooks. Use a naming convention:
         `number-initials-description`, e.g., `1.0-jqp-initial-data-exploration`.
     - **`models/`** – Stores trained models, predictions, and summaries.
     - **`reports/`** – Contains generated outputs (e.g., HTML, PDF, LaTeX), including figures.
-    
+
     Additionally:
-    
+
     - A **`log_book`** file should be maintained in the `experiments/` folder. It should briefly describe the project goals and each experiment. Entries can be added before and/or after an experiment. Writing at both stages is encouraged to compare expectations with outcomes.
     - A **`requirements.txt`** file should be included to capture the environment (e.g., via `pip freeze > requirements.txt`).
     - The experiment should be executable via `make`, with at least the following steps:
         - **Preprocessing** – Processes raw data.
         - **Modeling** – Includes training, fitting, transforming, etc. Key outputs (e.g., CSVs, plots) should be saved in the `reports/` folder.
-    
+
     Creating a new experiment should be straightforward. A script should be provided to either:
-    
+
     - Generate an empty folder structure, or
     - Duplicate an existing experiment as a starting point.
 
